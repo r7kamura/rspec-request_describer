@@ -1,6 +1,6 @@
 require "rspec/request_describer/version"
 
-module Rspec
+module RSpec
   module RequestDescriber
     # Your code goes here...
   end

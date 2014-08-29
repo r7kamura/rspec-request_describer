@@ -5,7 +5,7 @@ require 'rspec/request_describer/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "rspec-request_describer"
-  spec.version       = Rspec::RequestDescriber::VERSION
+  spec.version       = RSpec::RequestDescriber::VERSION
   spec.authors       = ["Ryo Nakamura"]
   spec.email         = ["r7kamura@gmail.com"]
   spec.summary       = "Force some rules to write self-documenting request spec."
