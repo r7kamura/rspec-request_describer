@@ -21,7 +21,11 @@ RSpec.configuration.include RSpec::RequestDescriber
 ```
 
 ## Usage
-RSpec::RequestDescriber provides `subject` from your description.
+RSpec::RequestDescriber provides some `subject` and `let` to your specs.
+
+### subject
+In the example below, the `subject` calls an HTTP request of GET /users,
+then returns its status code.
 
 ```ruby
 describe "GET /users" do
@@ -29,8 +33,10 @@ describe "GET /users" do
 end
 ```
 
-In the above example, the `subject` calls an HTTP request of GET /users,
-then returns its status code.
+### headers
+`headers` is provided to modify request headers.
+In the above example, a token is added into Authorization request header.
+
 
 ```ruby
 describe "GET /users" do
@@ -43,8 +49,14 @@ describe "GET /users" do
 end
 ```
 
-`headers` is provided to modify request headers.
-In the above example, a token is added into Authorization request header.
+### params
+You can also pass query parameter or request body by modifying `params`.
+In the this example, `?sort=id` is added into URL query string.
+For GET request `params` is converted into URL query string,
+while it's converted into request body for the other methods
+.
+Note that if you specified `application/json` Content-Type request header,
+`params` would be encoded into JSON format.
 
 ```ruby
 describe "GET /users" do
@@ -62,12 +74,9 @@ describe "GET /users" do
 end
 ```
 
-You can also pass query parameter or request body by modifying `params`.
-In the above example, `?sort=id` is added into URL query string.
-For GET request `params` is converted into URL query string,
-while it's converted into request body for the other methods.
-Note that if you specified `application/json` Content-Type request header,
-`params` would be encoded into JSON format.
+### variable
+You can use variables in URL path like `:id`.
+In this example, the returned value of `id` method is used as its real value.
 
 ```ruby
 describe "GET /users/:id" do
@@ -77,6 +86,3 @@ describe "GET /users/:id" do
   it { should == 200 }
 end
 ```
-
-You can use variables in URL path like `:id`.
-In the above example, the returned value of `id` method is used as its real value.
