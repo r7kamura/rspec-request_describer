@@ -2,10 +2,18 @@ require "rspec/request_describer/version"
 
 module RSpec
   module RequestDescriber
-    RESERVED_HEADER_NAMES = %w[
+    RESERVED_HEADER_NAMES = %w(
       Content-Type
       Host
-    ]
+    )
+
+    SUPPORTED_METHODS = %w(
+      GET
+      POST
+      PUT
+      PATCH
+      DELETE
+    )
 
     def self.included(base)
       base.instance_eval do
@@ -14,7 +22,7 @@ module RSpec
         end
 
         let(:request_body) do
-          if headers['Content-Type'] == 'application/json'
+          if headers["Content-Type"] == "application/json"
             params.to_json
           else
             params
@@ -31,14 +39,14 @@ module RSpec
 
         let(:env) do
           headers.inject({}) do |result, (key, value)|
-            key = 'HTTP_' + key unless key.in?(RESERVED_HEADER_NAMES)
-            key = key.gsub('-', '_').upcase
+            key = "HTTP_" + key unless key.in?(RESERVED_HEADER_NAMES)
+            key = key.gsub("-", "_").upcase
             result.merge(key => value)
           end
         end
 
         let(:endpoint_segments) do
-          example.full_description.match(/(GET|POST|PUT|PATCH|DELETE) ([\/a-z0-9_:]+)/).to_a
+          example.full_description.match(/(#{SUPPORTED_METHODS.join("|")}) ([\/a-z0-9_:]+)/).to_a
         end
 
         let(:method) do
