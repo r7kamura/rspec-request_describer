@@ -35,7 +35,7 @@ end
 
 ### headers
 `headers` is provided to modify request headers.
-In the above example, a token is added into Authorization request header.
+In the below example, a token is added into Authorization request header.
 
 
 ```ruby
