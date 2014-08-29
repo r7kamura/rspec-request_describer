@@ -1,31 +1,82 @@
-# Rspec::RequestDescriber
+# RSpec::RequestDescriber
+Force some rules to write self-documenting request spec.
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
+## Setup
+Add `rspec-request_describer` into your Gemfile, then run `bundle install`.
 
 ```ruby
-gem 'rspec-request_describer'
+# Gemfile
+gem "rspec-request_describer"
+
+# rspec-request_describer depends on some methods of rspec-rails (or rack-test),
+# so you may need to add it unless you haven't do it yet.
+gem "rspec-rails" # or "rack-test"
 ```
 
-And then execute:
+Then include `RSpec::RequestDescriber` into your `RSpec.configuration`.
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rspec-request_describer
+```ruby
+# spec/spec_helper.rb
+RSpec.configuration.include RSpec::RequestDescriber
+```
 
 ## Usage
+RSpec::RequestDescriber provides `subject` from your description.
 
-TODO: Write usage instructions here
+```ruby
+describe "GET /users" do
+  it { should == 200 }
+end
+```
 
-## Contributing
+In the above example, the `subject` calls an HTTP request of GET /users,
+then returns its status code.
 
-1. Fork it ( https://github.com/[my-github-username]/rspec-request_describer/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+```ruby
+describe "GET /users" do
+  context "with Authorization header" do
+    before do
+      headers["Authorization"] = "token 12345"
+    end
+    it { should == 200 }
+  end
+end
+```
+
+`headers` is provided to modify request headers.
+In the above example, a token is added into Authorization request header.
+
+```ruby
+describe "GET /users" do
+  context "with sort parameter" do
+    before do
+      params["sort"] = "id"
+    end
+
+    it "returns users in ID order" do
+      users = JSON.parse(response.body)
+      users[0].id.should == 1
+      users[1].id.should == 2
+    end
+  end
+end
+```
+
+You can also pass query parameter or request body by modifying `params`.
+In the above example, `?sort=id` is added into URL query string.
+For GET request `params` is converted into URL query string,
+while it's converted into request body for the other methods.
+Note that if you specified `application/json` Content-Type request header,
+`params` would be encoded into JSON format.
+
+```ruby
+describe "GET /users/:id" do
+  let(:id) do
+    User.create(name: "alice").id
+  end
+  it { should == 200 }
+end
+```
+
+You can use variables in URL path like `:id`.
+In the above example, the returned value of `id` method is used as its real value.
