@@ -39,7 +39,7 @@ module RSpec
 
         let(:env) do
           headers.inject({}) do |result, (key, value)|
-            key = "HTTP_" + key unless key.in?(RESERVED_HEADER_NAMES)
+            key = "HTTP_" + key unless RESERVED_HEADER_NAMES.include?(key)
             key = key.gsub("-", "_").upcase
             result.merge(key => value)
           end
