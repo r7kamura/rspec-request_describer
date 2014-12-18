@@ -1,3 +1,6 @@
+## 0.0.4
+* Define HTTPS as reserved header name
+
 ## 0.0.3
 * Remove dependency on ActiveSupport's `Object#in?`
 
