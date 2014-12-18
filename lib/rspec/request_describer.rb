@@ -5,6 +5,7 @@ module RSpec
     RESERVED_HEADER_NAMES = %w(
       Content-Type
       Host
+      HTTPS
     )
 
     SUPPORTED_METHODS = %w(
