@@ -48,7 +48,7 @@ module RSpec
 
         let(:endpoint_segments) do
           current_example = RSpec.respond_to?(:current_example) ? RSpec.current_example : example
-          current_example.full_description.match(/(#{SUPPORTED_METHODS.join("|")}) ([\/a-z0-9_:]+)/).to_a
+          current_example.full_description.match(/(#{SUPPORTED_METHODS.join("|")}) ([\/a-z0-9_:\-]+)/).to_a
         end
 
         let(:method) do
