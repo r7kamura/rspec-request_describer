@@ -1,3 +1,6 @@
+## 0.0.5
+* Allow hyphen in path
+
 ## 0.0.4
 * Define HTTPS as reserved header name
 
