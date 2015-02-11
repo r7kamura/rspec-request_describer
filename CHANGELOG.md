@@ -1,3 +1,6 @@
+## 0.0.6
+* Allow any non-space characters in URL path
+
 ## 0.0.5
 * Allow hyphen in path
 
