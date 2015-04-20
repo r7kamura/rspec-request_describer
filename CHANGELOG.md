@@ -1,3 +1,6 @@
+## 0.0.7
+* Add `send_request` to explicitly call `subject` (Thx @lazywei)
+
 ## 0.0.6
 * Allow any non-space characters in URL path
 
