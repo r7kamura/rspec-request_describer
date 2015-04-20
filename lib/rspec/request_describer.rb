@@ -19,6 +19,10 @@ module RSpec
     def self.included(base)
       base.instance_eval do
         subject do
+          send_request
+        end
+
+        let(:send_request) do
           send method, path, request_body, env
         end
 
