@@ -60,7 +60,7 @@ module RSpec
         end
 
         let(:path) do
-          endpoint_segments[2].gsub(/:([^\s\/]+)/) { send($1) }
+          endpoint_segments[2].gsub(/:(\w+[!?=]?)/) { send($1) }
         end
       end
     end
