@@ -1,3 +1,6 @@
+## 0.0.8
+- Use more sophisticated method capture pattern
+
 ## 0.0.7
 - Add `send_request` to explicitly call `subject` (Thx @lazywei)
 
