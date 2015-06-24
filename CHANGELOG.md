@@ -1,3 +1,6 @@
+## 0.0.9
+- Ignore case-sensivity on Content-Type checking
+
 ## 0.0.8
 - Use more sophisticated method capture pattern
 
