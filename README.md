@@ -9,7 +9,7 @@ HTTP requests will automatically sent before each example based on what you spec
     # Gemfile
     gem "rspec-request_describer"
 
-    # Add one of these since rspec-request_describer depends on some methods of rspec-rails (or rack-test).
+    # rspec-request_describer depends on some methods of rspec-rails (or rack-test).
     gem "rspec-rails" # or "rack-test"
     ```
 
@@ -21,7 +21,7 @@ HTTP requests will automatically sent before each example based on what you spec
     ```
 
 
-## Usage
+## Basic usage
 RSpec::RequestDescriber automatically generates some `subject`'s and `let`'s behind the scenes for your convenience, based on the HTTP request string that you passed in to the describe method.
 
 ```ruby
@@ -43,7 +43,7 @@ describe "GET /users/:id" do
     it { should == 404 }
   end
 
-  # Testing the response body as well as the status code.
+  # You can access the response of your last HTTP request.
   context "with valid ID" do
     it "returns a user" do
       should == 200
@@ -53,9 +53,11 @@ describe "GET /users/:id" do
 end
 ```
 
-### subject
-In the example below, the `subject` calls an HTTP request of GET /users,
-then returns its status code.
+
+## Features / Convention
+
+###  "virtual" subject
+The HTTP request string you pass in to the describe method becomes a "virtual" `subject` with an HTTP request. Before each example, one HTTP request is sent, which returns its status code and response.
 
 ```ruby
 describe "GET /users" do
@@ -63,10 +65,9 @@ describe "GET /users" do
 end
 ```
 
-### headers
-`headers` is provided to modify request headers.
-In the below example, a token is added into Authorization request header.
-
+###  easy modification of request headers
+The `headers` hash is provided to modify your request headers.
+In this example, a token is added to Authorization request header.
 
 ```ruby
 describe "GET /users" do
@@ -80,19 +81,18 @@ end
 ```
 
 ### params
-You can also pass query parameter or request body by modifying `params`.
-In the this example, `?sort=id` is added into URL query string.
-For GET request `params` is converted into URL query string,
-while it's converted into request body for the other methods
-.
-Note that if you specified `application/json` Content-Type request header,
-`params` would be encoded into JSON format.
+You can also pass query parameter or request body by modifying `params` hash.
+For GET requests, `params` is converted to the URL query string,
+while it is included in the request body for the other HTTP methods.
+
+In this example, `?sort=id` is added to the URL query string.
+Note: If you have specified `application/json` as a Content-Type in the request header, `params` will be encoded accordingly.
 
 ```ruby
 describe "GET /users" do
   context "with sort parameter" do
     before do
-      params["sort"] = "id"
+      params["sort"] = "id"  # `?sort=id` is added to the URL query string
     end
 
     it "returns users in ID order" do
@@ -106,7 +106,7 @@ end
 
 ### variable
 You can use variables in URL path like `:id`.
-In this example, the returned value of `id` method is used as its real value.
+In this example, the returned value of the `id` method is inserted into the path before sending an HTTP request.
 
 ```ruby
 describe "GET /users/:id" do
