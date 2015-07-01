@@ -1,5 +1,7 @@
 # RSpec::RequestDescriber
-Force some rules to write self-documenting request spec.
+- Simplifies your request specs with convention.
+- Helps you write clean request specs by enforcing the "one HTTP request per example" rule.
+- Automatically sends an HTTP request based on what you specify as a describe string following the convention.
 
 ## Setup
 Add `rspec-request_describer` into your Gemfile, then run `bundle install`.
