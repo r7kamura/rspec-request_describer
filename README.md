@@ -86,6 +86,7 @@ For GET requests, `params` is converted to the URL query string,
 while it is included in the request body for the other HTTP methods.
 
 In this example, `?sort=id` is added to the URL query string.
+
 Note: If you have specified `application/json` as a Content-Type in the request header, `params` will be encoded accordingly.
 
 ```ruby
@@ -105,8 +106,8 @@ end
 ```
 
 ### variable
-You can use variables in URL path like `:id`.
-In this example, the returned value of the `id` method is inserted into the path before sending an HTTP request.
+You can use variables in URL path like `:id` in `GET /users/:id`.
+In this example, we provide the path with a value through the `let(:id)` method, whose returned value is inserted into the path before sending an HTTP request.
 
 ```ruby
 describe "GET /users/:id" do
