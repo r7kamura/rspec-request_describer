@@ -1,29 +1,57 @@
 # RSpec::RequestDescriber
-- Simplifies your request specs with convention.
-- Helps you write clean request specs by enforcing the "one HTTP request per example" rule.
-- Automatically sends an HTTP request based on what you specify as a describe string following the convention.
+RSpec::RequestDescriber lets you write clean request specs by enforcing the "one HTTP request per example" rule.
+HTTP requests will automatically sent before each example based on what you specify as a describe string following the convention.
 
 ## Setup
-Add `rspec-request_describer` into your Gemfile, then run `bundle install`.
 
-```ruby
-# Gemfile
-gem "rspec-request_describer"
+1. Add `rspec-request_describer` to your Gemfile, then run `bundle install`.
+    ```ruby
+    # Gemfile
+    gem "rspec-request_describer"
 
-# rspec-request_describer depends on some methods of rspec-rails (or rack-test),
-# so you may need to add it unless you haven't do it yet.
-gem "rspec-rails" # or "rack-test"
-```
+    # Add one of these since rspec-request_describer depends on some methods of rspec-rails (or rack-test).
+    gem "rspec-rails" # or "rack-test"
+    ```
 
-Then include `RSpec::RequestDescriber` into your `RSpec.configuration`.
 
-```ruby
-# spec/spec_helper.rb
-RSpec.configuration.include RSpec::RequestDescriber
-```
+2. Include `RSpec::RequestDescriber` into your `RSpec.configuration`.
+    ```ruby
+    # spec/spec_helper.rb
+    RSpec.configuration.include RSpec::RequestDescriber
+    ```
+
 
 ## Usage
-RSpec::RequestDescriber provides some `subject` and `let` to your specs.
+RSpec::RequestDescriber automatically generates some `subject`'s and `let`'s behind the scenes for your convenience, based on the HTTP request string that you passed in to the describe method.
+
+```ruby
+# RSpec::RequestDescriber reads the string "GET /users/:id" and
+# defines the virtual subject, subject { get "/users/#{id}" }.
+
+describe "GET /users/:id" do
+  let(:id) do
+    User.create(name: "alice").id
+  end
+
+  context "with invalid ID" do
+    let(:id) do
+      "invalid"
+    end
+
+    # Before each example, the virtual subject will be run sending the HTTP request.
+    # You can write a concise example simply to test the response.
+    it { should == 404 }
+  end
+
+  # Testing the response body as well as the status code.
+  context "with valid ID" do
+    it "returns a user" do
+      should == 200
+      response.body.should include("alice")
+    end
+  end
+end
+```
 
 ### subject
 In the example below, the `subject` calls an HTTP request of GET /users,
