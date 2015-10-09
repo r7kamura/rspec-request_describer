@@ -23,7 +23,7 @@ module RSpec
         end
 
         let(:send_request) do
-          send method, path, request_body, env
+          send http_method, path, request_body, env
         end
 
         let(:request_body) do
@@ -55,7 +55,7 @@ module RSpec
           current_example.full_description.match(/(#{SUPPORTED_METHODS.join("|")}) (\S+)/).to_a
         end
 
-        let(:method) do
+        let(:http_method) do
           endpoint_segments[1].downcase
         end
 
