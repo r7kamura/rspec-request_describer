@@ -1,3 +1,7 @@
+## 0.0.10
+- Private APIs `#request_body`, `#env`, `#endpoint_segments`, `#method` and `#path`
+  are now prefixed with `_` to avoid name collision and override of `Object#method`.
+
 ## 0.0.9
 - Ignore case-sensivity on Content-Type checking
 
