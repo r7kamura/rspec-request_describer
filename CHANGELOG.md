@@ -1,3 +1,6 @@
+## 0.1.0
+- Rename `method` with `http_method` (Thx @yujinakayama, #8)
+
 ## 0.0.9
 - Ignore case-sensivity on Content-Type checking
 
