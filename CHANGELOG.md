@@ -1,3 +1,6 @@
+## 0.1.1
+- Prevent warning for Rails 5  (Thx @mrkn, #9)
+
 ## 0.1.0
 - Rename `method` with `http_method` (Thx @yujinakayama, #8)
 
