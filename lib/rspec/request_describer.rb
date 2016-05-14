@@ -22,8 +22,14 @@ module RSpec
           send_request
         end
 
-        let(:send_request) do
-          send http_method, path, request_body, env
+        if (ActionDispatch::Integration::Session.instance_method(:process_with_kwargs) rescue false)
+          let(:send_request) do
+            send http_method, path, params: request_body, headers: env
+          end
+        else
+          let(:send_request) do
+            send http_method, path, request_body, env
+          end
         end
 
         let(:request_body) do
