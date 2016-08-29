@@ -17,7 +17,7 @@ Then include `RSpec::RequestDescriber` into your `RSpec.configuration`.
 
 ```ruby
 # spec/spec_helper.rb
-RSpec.configuration.include RSpec::RequestDescriber
+RSpec.configuration.include RSpec::RequestDescriber, type: :request
 ```
 
 ## Usage
