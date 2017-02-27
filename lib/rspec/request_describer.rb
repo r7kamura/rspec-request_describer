@@ -58,7 +58,7 @@ module RSpec
           end
 
           let(:endpoint_segments) do
-            current_example = RSpec.respond_to?(:current_example) ? RSpec.current_example : example
+            current_example = ::RSpec.respond_to?(:current_example) ? ::RSpec.current_example : example
             current_example.full_description.match(/(#{SUPPORTED_METHODS.join("|")}) (\S+)/).to_a
           end
 
@@ -74,8 +74,8 @@ module RSpec
 
       # @private
       def process_with_kwargs?
-        ActionDispatch::Integration::Session.instance_method(:process) ||
-        ActionDispatch::Integration::Session.instance_method(:process_with_kwargs) rescue false
+        ::ActionDispatch::Integration::Session.instance_method(:process) ||
+        ::ActionDispatch::Integration::Session.instance_method(:process_with_kwargs) rescue false
       end
     end
   end
