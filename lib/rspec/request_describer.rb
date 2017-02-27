@@ -22,7 +22,7 @@ module RSpec
           send_request
         end
 
-        if (ActionDispatch::Integration::Session.instance_method(:process_with_kwargs) rescue false)
+        if ::RSpec::RequestDescriber.process_with_kwargs?
           let(:send_request) do
             send http_method, path, params: request_body, headers: env
           end
@@ -69,6 +69,12 @@ module RSpec
           endpoint_segments[2].gsub(/:(\w+[!?=]?)/) { send($1) }
         end
       end
+    end
+
+    # @private
+    def self.process_with_kwargs?
+      ActionDispatch::Integration::Session.instance_method(:process) ||
+      ActionDispatch::Integration::Session.instance_method(:process_with_kwargs) rescue false
     end
   end
 end
