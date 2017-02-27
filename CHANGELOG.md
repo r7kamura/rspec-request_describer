@@ -1,3 +1,8 @@
+## Unreleased
+
+- Support actionpack 5.1.0
+- Dependent on actionpack
+
 ## 0.1.1
 - Prevent warning for Rails 5  (Thx @mrkn, #9)
 
