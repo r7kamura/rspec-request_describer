@@ -25,11 +25,11 @@ module RSpec
 
           if ::RSpec::RequestDescriber.process_with_kwargs?
             let(:send_request) do
-              send http_method, path, params: request_body, headers: env
+              process(http_method, path, params: request_body, headers: env)
             end
           else
             let(:send_request) do
-              send http_method, path, request_body, env
+              process(http_method, path, request_body, env)
             end
           end
 
@@ -62,8 +62,9 @@ module RSpec
             current_example.full_description.match(/(#{SUPPORTED_METHODS.join("|")}) (\S+)/).to_a
           end
 
+          # @return [Symbol] e.g. `:get`
           let(:http_method) do
-            endpoint_segments[1].downcase
+            endpoint_segments[1].downcase.to_sym
           end
 
           let(:path) do
