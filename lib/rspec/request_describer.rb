@@ -59,7 +59,7 @@ module RSpec
 
           let(:endpoint_segments) do
             current_example = ::RSpec.respond_to?(:current_example) ? ::RSpec.current_example : example
-            current_example.full_description.match(/(#{SUPPORTED_METHODS.join("|")}) (\S+)/).to_a
+            current_example.full_description.match(/(#{::Regexp.union(SUPPORTED_METHODS)}) (\S+)/).to_a
           end
 
           # @return [Symbol] e.g. `:get`
