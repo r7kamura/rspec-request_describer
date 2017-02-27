@@ -75,7 +75,9 @@ module RSpec
       # @private
       def process_with_kwargs?
         ::ActionDispatch::Integration::Session.instance_method(:process) ||
-        ::ActionDispatch::Integration::Session.instance_method(:process_with_kwargs) rescue false
+        ::ActionDispatch::Integration::Session.instance_method(:process_with_kwargs)
+      rescue ::NameError
+        false
       end
     end
   end
