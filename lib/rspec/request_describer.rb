@@ -9,11 +9,11 @@ module RSpec
     )
 
     SUPPORTED_METHODS = %w(
+      DELETE
       GET
+      PATCH
       POST
       PUT
-      PATCH
-      DELETE
     )
 
     class << self
