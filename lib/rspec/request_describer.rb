@@ -24,7 +24,7 @@ module RSpec
           end
 
           let(:send_request) do
-            process(
+            send(
               http_method,
               path,
               headers: env,
@@ -61,9 +61,9 @@ module RSpec
             current_example.full_description.match(/(#{::Regexp.union(SUPPORTED_METHODS)}) (\S+)/).to_a
           end
 
-          # @return [Symbol] e.g. `:get`
+          # @return [String] e.g. `"get"`
           let(:http_method) do
-            endpoint_segments[1].downcase.to_sym
+            endpoint_segments[1].downcase
           end
 
           let(:path) do

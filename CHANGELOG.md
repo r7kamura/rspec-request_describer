@@ -1,3 +1,7 @@
+## Unreleased
+
+- Fix error from `#process`
+
 ## 0.2.0
 
 - Support actionpack 5.1.0
