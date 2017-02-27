@@ -1,4 +1,4 @@
-## Unreleased
+## 0.2.1
 
 - Fix error from `#process`
 
