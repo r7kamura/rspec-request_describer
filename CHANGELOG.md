@@ -1,4 +1,4 @@
-## Unreleased
+## 0.2.0
 
 - Support actionpack 5.1.0
 - Dependent on actionpack
