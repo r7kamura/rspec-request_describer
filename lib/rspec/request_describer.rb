@@ -3,9 +3,9 @@ require "rspec/request_describer/version"
 module RSpec
   module RequestDescriber
     RESERVED_HEADER_NAMES = %w(
-      Content-Type
-      Host
-      HTTPS
+      content-type
+      host
+      https
     )
 
     SUPPORTED_METHODS = %w(
@@ -50,7 +50,7 @@ module RSpec
 
           let(:env) do
             headers.inject({}) do |result, (key, value)|
-              key = "HTTP_" + key unless RESERVED_HEADER_NAMES.include?(key)
+              key = "HTTP_" + key unless RESERVED_HEADER_NAMES.include?(key.downcase)
               key = key.gsub("-", "_").upcase
               result.merge(key => value)
             end
