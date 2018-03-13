@@ -1,3 +1,7 @@
+## v0.2.2
+
+- Fix bug: Ignore case-sensitivity of HTTP headers (Thx @k5trismegistus, #14)
+
 ## 0.2.1
 
 - Fix error from `#process`
