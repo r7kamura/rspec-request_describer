@@ -1,5 +1,7 @@
 # RSpec::RequestDescriber
 
+[![CircleCI](https://circleci.com/gh/r7kamura/rspec-request_describer.svg?style=svg)](https://circleci.com/gh/r7kamura/rspec-request_describer)
+
 An RSpec plugin to write self-documenting request-specs.
 
 This gem is designed for:
