@@ -2,7 +2,10 @@
 
 An RSpec plugin to write self-documenting request-specs.
 
-This gem is designed for rspec-rails and rack-test.
+This gem is designed for:
+
+- [rack-test](https://github.com/rack-test/rack-test)
+- [rspec-rails](https://github.com/rspec/rspec-rails)
 
 ## Setup
 
