@@ -1,20 +1,20 @@
-require "rspec/request_describer/version"
+require 'rspec/request_describer/version'
 
 module RSpec
   module RequestDescriber
-    RESERVED_HEADER_NAMES = %w(
+    RESERVED_HEADER_NAMES = %w[
       content-type
       host
       https
-    )
+    ].freeze
 
-    SUPPORTED_METHODS = %w(
+    SUPPORTED_METHODS = %w[
       DELETE
       GET
       PATCH
       POST
       PUT
-    )
+    ].freeze
 
     class << self
       def included(base)
@@ -28,12 +28,12 @@ module RSpec
               http_method,
               path,
               headers: env,
-              params: request_body,
+              params: request_body
             )
           end
 
           let(:request_body) do
-            if headers.any? { |key, value| key.casecmp("content-type").zero? && value == "application/json" }
+            if headers.any? { |key, value| key.casecmp('content-type').zero? && value == 'application/json' }
               params.to_json
             else
               params
@@ -50,8 +50,8 @@ module RSpec
 
           let(:env) do
             headers.inject({}) do |result, (key, value)|
-              key = "HTTP_" + key unless RESERVED_HEADER_NAMES.include?(key.downcase)
-              key = key.tr("-", "_").upcase
+              key = 'HTTP_' + key unless RESERVED_HEADER_NAMES.include?(key.downcase)
+              key = key.tr('-', '_').upcase
               result.merge(key => value)
             end
           end
@@ -67,7 +67,7 @@ module RSpec
           end
 
           let(:path) do
-            endpoint_segments[2].gsub(/:(\w+[!?=]?)/) { send($1) }
+            endpoint_segments[2].gsub(/:(\w+[!?=]?)/) { send(Regexp.last_match(1)) }
           end
         end
       end
