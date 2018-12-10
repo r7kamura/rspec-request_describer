@@ -7,18 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-# Cop supports --auto-correct.
-Performance/Casecmp:
-  Exclude:
-    - 'lib/rspec/request_describer.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Performance/StringReplacement:
-  Exclude:
-    - 'lib/rspec/request_describer.rb'
-
-# Offense count: 1
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
