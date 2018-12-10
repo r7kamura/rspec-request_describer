@@ -1,45 +1,94 @@
-## v0.2.2
+# Changelog
 
-- Fix bug: Ignore case-sensitivity of HTTP headers (Thx @k5trismegistus, #14)
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## 0.2.2
+
+### Fixed
+
+- Fix bug: Ignore case-sensitivity of HTTP headers.
 
 ## 0.2.1
 
-- Fix error from `#process`
+### Fixed
+
+- Fix error from `#process`.
 
 ## 0.2.0
 
-- Support actionpack 5.1.0
-- Dependent on actionpack
+### Added
+
+- Support actionpack 5.1.0.
+
+### Changed
+
+- Declare runtime dependency on actionpack.
 
 ## 0.1.1
-- Prevent warning for Rails 5  (Thx @mrkn, #9)
+
+### Fixed
+
+- Prevent warning for Rails 5.
 
 ## 0.1.0
-- Rename `method` with `http_method` (Thx @yujinakayama, #8)
+
+### Changed
+
+- Rename `method` with `http_method`.
 
 ## 0.0.9
-- Ignore case-sensivity on Content-Type checking
+
+### Changed
+
+- Ignore case-sensivity on Content-Type checking.
 
 ## 0.0.8
-- Use more sophisticated method capture pattern
+
+### Changed
+
+- Use more sophisticated method capture pattern.
 
 ## 0.0.7
-- Add `send_request` to explicitly call `subject` (Thx @lazywei)
+
+### Added
+
+- Add `send_request` to explicitly call `subject`.
 
 ## 0.0.6
-- Allow any non-space characters in URL path
+
+### Fixed
+
+- Allow any non-space characters in URL path.
 
 ## 0.0.5
-- Allow hyphen in path
+
+### Fixed
+
+- Allow hyphen in path.
 
 ## 0.0.4
-- Define HTTPS as reserved header name
+
+### Added
+
+- Define HTTPS as reserved header name.
 
 ## 0.0.3
-- Remove dependency on ActiveSupport's `Object#in?`
+
+### Removed
+
+- Remove dependency on ActiveSupport's `Object#in?`.
 
 ## 0.0.2
-- Support RSpec 3
+
+### Added
+
+- Support RSpec 3.
 
 ## 0.0.1
-- 1st Release
+
+### Added
+
+- 1st Release.
