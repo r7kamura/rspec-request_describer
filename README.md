@@ -9,7 +9,7 @@ An RSpec plugin to write self-documenting request-specs.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "rspec-request_describer"
+gem 'rspec-request_describer'
 ```
 
 And then execute:
@@ -39,8 +39,8 @@ RSpec.configuration.include RSpec::RequestDescriber, type: :request
 `RSpec::RequestDescriber` provides `subject` from its top-level description.
 
 ```ruby
-describe "GET /users" do
-  it { should == 200 }
+RSpec.describe 'GET /users' do
+  it { is_expected.to eq(200) }
 end
 ```
 
@@ -49,12 +49,12 @@ end
 If you want to modify request headers, change `headers` before calling `subject`.
 
 ```ruby
-describe "GET /users" do
-  context "with Authorization header" do
+RSpec.describe 'GET /users' do
+  context 'with Authorization header' do
     before do
-      headers["Authorization"] = "token 12345"
+      headers['Authorization'] = 'token 12345'
     end
-    it { should == 200 }
+    it { is_expected.to eq(200) }
   end
 end
 ```
@@ -64,16 +64,18 @@ end
 If you want to modify request parameters, change `params` before calling `subject`.
 
 ```ruby
-describe "GET /users" do
-  context "with sort parameter" do
+RSpec.describe 'GET /users' do
+  context 'with sort parameter' do
     before do
-      params["sort"] = "id"
+      params['sort'] = 'id'
     end
 
-    it "returns users in ID order" do
+    it 'returns users in ID order' do
+      is_expected.to eq(200)
+
       users = JSON.parse(response.body)
-      users[0].id.should == 1
-      users[1].id.should == 2
+      expect(users[0]['id']).to eq(1)
+      expect(users[1]['id']).to eq(2)
     end
   end
 end
@@ -85,10 +87,11 @@ You can embed variables in URL path like `/users/:id`.
 In this example, the returned value of `id` method will be emobeded as its real value.
 
 ```ruby
-describe "GET /users/:id" do
+RSpec.describe 'GET /users/:id' do
   let(:id) do
-    User.create(name: "alice").id
+    User.create(name: 'alice').id
   end
-  it { should == 200 }
+
+  it { is_expected.to eq(200) }
 end
 ```
