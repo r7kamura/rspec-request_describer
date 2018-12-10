@@ -1,31 +1,42 @@
 # RSpec::RequestDescriber
-Force some rules to write self-documenting request spec.
+
+An RSpec plugin to write self-documenting request-specs.
 
 ## Setup
-Add `rspec-request_describer` into your Gemfile, then run `bundle install`.
+
+### Install
+
+Add this line to your application's Gemfile:
 
 ```ruby
-# Gemfile
 gem "rspec-request_describer"
-
-# rspec-request_describer depends on some methods of rspec-rails (or rack-test),
-# so you may need to add it unless you haven't do it yet.
-gem "rspec-rails" # or "rack-test"
 ```
 
-Then include `RSpec::RequestDescriber` into your `RSpec.configuration`.
+And then execute:
+
+```
+bundle
+```
+
+Or install it yourself as:
+
+```
+gem install rspec-request_describer
+```
+
+### Include
+
+Include `RSpec::RequestDescriber` to your example groups like this:
 
 ```ruby
-# spec/spec_helper.rb
 RSpec.configuration.include RSpec::RequestDescriber, type: :request
 ```
 
 ## Usage
-RSpec::RequestDescriber provides some `subject` and `let` to your specs.
 
 ### subject
-In the example below, the `subject` calls an HTTP request of GET /users,
-then returns its status code.
+
+`RSpec::RequestDescriber` provides `subject` from its top-level description.
 
 ```ruby
 describe "GET /users" do
@@ -34,9 +45,8 @@ end
 ```
 
 ### headers
-`headers` is provided to modify request headers.
-In the below example, a token is added into Authorization request header.
 
+If you want to modify request headers, change `headers` before calling `subject`.
 
 ```ruby
 describe "GET /users" do
@@ -50,13 +60,8 @@ end
 ```
 
 ### params
-You can also pass query parameter or request body by modifying `params`.
-In the this example, `?sort=id` is added into URL query string.
-For GET request `params` is converted into URL query string,
-while it's converted into request body for the other methods
-.
-Note that if you specified `application/json` Content-Type request header,
-`params` would be encoded into JSON format.
+
+If you want to modify request parameters, change `params` before calling `subject`.
 
 ```ruby
 describe "GET /users" do
@@ -74,9 +79,10 @@ describe "GET /users" do
 end
 ```
 
-### variable
-You can use variables in URL path like `:id`.
-In this example, the returned value of `id` method is used as its real value.
+### variables in URL path
+
+You can embed variables in URL path like `/users/:id`.
+In this example, the returned value of `id` method will be emobeded as its real value.
 
 ```ruby
 describe "GET /users/:id" do
