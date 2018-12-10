@@ -2,6 +2,8 @@
 
 An RSpec plugin to write self-documenting request-specs.
 
+This gem is designed for rspec-rails and rack-test.
+
 ## Setup
 
 ### Install
@@ -39,6 +41,7 @@ RSpec.configuration.include RSpec::RequestDescriber, type: :request
 `RSpec::RequestDescriber` provides `subject` from its top-level description.
 
 ```ruby
+# subject will be `get('/users')`.
 RSpec.describe 'GET /users' do
   it { is_expected.to eq(200) }
 end
@@ -49,6 +52,7 @@ end
 If you want to modify request headers, change `headers` before calling `subject`.
 
 ```ruby
+# `subject` will be `get('/users', headers: { 'Authorization' => 'token 12345' })`.
 RSpec.describe 'GET /users' do
   context 'with Authorization header' do
     before do
@@ -64,6 +68,7 @@ end
 If you want to modify request parameters, change `params` before calling `subject`.
 
 ```ruby
+# `subject` will be `get('/users', params: { 'sort' => 'id' })`.
 RSpec.describe 'GET /users' do
   context 'with sort parameter' do
     before do
@@ -87,9 +92,14 @@ You can embed variables in URL path like `/users/:id`.
 In this example, the returned value of `id` method will be emobeded as its real value.
 
 ```ruby
-RSpec.describe 'GET /users/:id' do
-  let(:id) do
-    User.create(name: 'alice').id
+# `subject` will be `get("/users/#{user_id}")`.
+RSpec.describe 'GET /users/:user_id' do
+  let(:user) do
+    User.create(name: 'alice')
+  end
+
+  let(:user_id) do
+    user.id
   end
 
   it { is_expected.to eq(200) }
