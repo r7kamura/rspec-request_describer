@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = RSpec::RequestDescriber::VERSION
   spec.authors       = ["Ryo Nakamura"]
   spec.email         = ["r7kamura@gmail.com"]
-  spec.summary       = "Force some rules to write self-documenting request spec."
+  spec.summary       = "An RSpec plugin to write self-documenting request-specs."
   spec.homepage      = "https://github.com/r7kamura/rspec-request_describer"
   spec.license       = "MIT"
 
