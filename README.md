@@ -36,6 +36,8 @@ gem install rspec-request_describer
 Include `RSpec::RequestDescriber` to your example groups like this:
 
 ```ruby
+require 'rspec/request_describer'
+
 RSpec.configuration.include RSpec::RequestDescriber, type: :request
 ```
 
