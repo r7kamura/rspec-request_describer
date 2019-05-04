@@ -33,10 +33,12 @@ module RSpec
           end
 
           let(:request_body) do
-            if headers.any? { |key, value| key.casecmp('content-type').zero? && value == 'application/json' }
+            if env['CONTENT_TYPE'] == 'application/json'
               params.to_json
             else
-              params
+              params.inject({}) do |result, (key, value)|
+                result.merge(key.to_s => value)
+              end
             end
           end
 
@@ -50,6 +52,7 @@ module RSpec
 
           let(:env) do
             headers.inject({}) do |result, (key, value)|
+              key = key.to_s
               key = 'HTTP_' + key unless RESERVED_HEADER_NAMES.include?(key.downcase)
               key = key.tr('-', '_').upcase
               result.merge(key => value)
