@@ -51,12 +51,46 @@ RSpec.describe RSpec::RequestDescriber do
       end
     end
 
+    context 'with symbolized keys headers' do
+      let(:headers) do
+        super().merge(AUTHORIZATION: 'token 12345')
+      end
+
+      it 'calls #get with HTTP_ prefixed and stringified keys headers' do
+        is_expected.to eq(
+          [
+            :get,
+            '/users',
+            headers: { 'HTTP_AUTHORIZATION' => 'token 12345' },
+            params: {}
+          ]
+        )
+      end
+    end
+
     context 'with params' do
       let(:params) do
         super().merge('sort' => 'id')
       end
 
       it 'calls #get with params' do
+        is_expected.to eq(
+          [
+            :get,
+            '/users',
+            headers: {},
+            params: { 'sort' => 'id' }
+          ]
+        )
+      end
+    end
+
+    context 'with symbolized keys params' do
+      let(:params) do
+        super().merge(sort: 'id')
+      end
+
+      it 'calls #get with stringified keys params' do
         is_expected.to eq(
           [
             :get,
