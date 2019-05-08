@@ -33,7 +33,7 @@ module RSpec
           end
 
           let(:request_body) do
-            if env['CONTENT_TYPE'] == 'application/json'
+            if headers.any? { |key, value| key.to_s.casecmp('content-type').zero? && value == 'application/json' }
               params.to_json
             else
               params.inject({}) do |result, (key, value)|
