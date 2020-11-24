@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## v0.3.2 - 2020-02-15
 
+### Removed
+
 - Remove runtime gem dependency on actionpack.
 
 ## v0.3.1 - 2019-05-08
+
+### Fixed
 
 - Fix env calculation timing.
 
