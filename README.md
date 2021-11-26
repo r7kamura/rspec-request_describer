@@ -39,7 +39,9 @@ Include `RSpec::RequestDescriber` to your example groups like this:
 ```ruby
 require 'rspec/request_describer'
 
-RSpec.configuration.include RSpec::RequestDescriber, type: :request
+RSpec.configure do |config|
+  config.include RSpec::RequestDescriber, type: :request
+end
 ```
 
 ## Usage
