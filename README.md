@@ -108,7 +108,7 @@ RSpec.describe 'GET /users' do
 end
 ```
 
-### variables in URL path
+### path parameters
 
 You can embed variables in URL path like `/users/:user_id`.
 In this example, the returned value of `user_id` method will be emobeded as its real value.
