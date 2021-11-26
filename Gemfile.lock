@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec-request_describer (0.2.2)
+    rspec-request_describer (0.3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -43,11 +43,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.7)
-  rake (~> 13.0)
+  rake
   rspec
   rspec-request_describer!
   rubocop
 
 BUNDLED WITH
-   1.17.1
+   2.2.29
