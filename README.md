@@ -46,6 +46,8 @@ end
 
 ## Usage
 
+Note that this is an example in a Rails app.
+
 ### subject
 
 `RSpec::RequestDescriber` provides `subject` from its top-level description.
@@ -53,7 +55,10 @@ end
 ```ruby
 # subject will be `get('/users')`.
 RSpec.describe 'GET /users' do
-  it { is_expected.to eq(200) }
+  it 'returns 200' do
+    subject
+    expect(response).to have_http_status(200)
+  end
 end
 ```
 
@@ -68,7 +73,11 @@ RSpec.describe 'GET /users' do
     before do
       headers['Authorization'] = 'token 12345'
     end
-    it { is_expected.to eq(200) }
+
+    it 'returns 200' do
+      subject
+      expect(response).to have_http_status(200)
+    end
   end
 end
 ```
@@ -85,12 +94,15 @@ RSpec.describe 'GET /users' do
       params['sort'] = 'id'
     end
 
-    it 'returns users in ID order' do
-      is_expected.to eq(200)
-
-      users = JSON.parse(response.body)
-      expect(users[0]['id']).to eq(1)
-      expect(users[1]['id']).to eq(2)
+    it 'returns 200 with expected JSON body' do
+      subject
+      expect(response).to have_http_status(200)
+      expect(response.parsed_body).to match(
+        [
+          hash_including('id' => 1),
+          hash_including('id' => 2),
+        ]
+      )
     end
   end
 end
@@ -98,8 +110,8 @@ end
 
 ### variables in URL path
 
-You can embed variables in URL path like `/users/:id`.
-In this example, the returned value of `id` method will be emobeded as its real value.
+You can embed variables in URL path like `/users/:user_id`.
+In this example, the returned value of `user_id` method will be emobeded as its real value.
 
 ```ruby
 # `subject` will be `get("/users/#{user_id}")`.
@@ -112,6 +124,9 @@ RSpec.describe 'GET /users/:user_id' do
     user.id
   end
 
-  it { is_expected.to eq(200) }
+  it 'returns 200' do
+    subject
+    expect(response).to have_http_status(200)
+  end
 end
 ```
