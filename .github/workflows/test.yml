@@ -9,5 +9,9 @@ on:
 jobs:
   rspec:
     uses: r7kamura/workflows/.github/workflows/ruby-rspec.yml@main
+    with:
+      ruby-version: 2.7.4
   rubocop:
     uses: r7kamura/workflows/.github/workflows/ruby-rubocop.yml@main
+    with:
+      ruby-version: 2.7.4
