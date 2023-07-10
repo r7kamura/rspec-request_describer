@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Support HEAD HTTP method.
+
 ## 0.3.2 - 2020-02-15
 
 ### Removed
