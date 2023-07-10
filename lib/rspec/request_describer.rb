@@ -11,6 +11,7 @@ module RSpec
     SUPPORTED_METHODS = %w[
       DELETE
       GET
+      HEAD
       PATCH
       POST
       PUT
