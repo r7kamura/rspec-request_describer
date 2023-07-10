@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rspec-request_describer (0.3.2)
+    rspec-request_describer (0.4.0)
 
 GEM
   remote: https://rubygems.org/

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.4.0 - 2023-07-10
+
 ### Added
 
 - Support HEAD HTTP method.
