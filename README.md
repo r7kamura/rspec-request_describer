@@ -111,7 +111,7 @@ end
 ### path parameters
 
 You can embed variables in URL path like `/users/:user_id`.
-In this example, the returned value of `user_id` method will be emobeded as its real value.
+In this example, the returned value of `user_id` method will be embedded as its real value.
 
 ```ruby
 # `subject` will be `get("/users/#{user_id}")`.
