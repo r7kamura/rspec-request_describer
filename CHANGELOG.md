@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Raise friendly error on incorrect `describe` usage.
+
 ## 0.4.0 - 2023-07-10
 
 ### Added
