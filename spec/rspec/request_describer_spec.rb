@@ -138,4 +138,10 @@ RSpec.describe RSpec::RequestDescriber do
       )
     end
   end
+
+  context 'when the test case is under the top-level describe unexpectedly' do
+    it 'handles the error' do
+      expect { subject }.to raise_error(RSpec::RequestDescriber::IncorrectDescribe)
+    end
+  end
 end
