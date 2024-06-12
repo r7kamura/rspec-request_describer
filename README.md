@@ -12,33 +12,18 @@ This gem is designed for:
 
 ## Setup
 
-### Install
-
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'rspec-request_describer'
+group :test do
+  gem 'rspec-request_describer'
+end
 ```
 
-And then execute:
-
-```
-bundle
-```
-
-Or install it yourself as:
-
-```
-gem install rspec-request_describer
-```
-
-### Include
-
-Include `RSpec::RequestDescriber` to your example groups like this:
+And then include `RSpec::RequestDescriber`:
 
 ```ruby
-require 'rspec/request_describer'
-
+# spec/rails_helper.rb
 RSpec.configure do |config|
   config.include RSpec::RequestDescriber, type: :request
 end
@@ -46,15 +31,42 @@ end
 
 ## Usage
 
-Note that this is an example in a Rails app.
-
-### subject
-
-`RSpec::RequestDescriber` provides `subject` from its top-level description.
+Write HTTP method and URL path in the top-level description of your request-specs.
 
 ```ruby
-# subject will be `get('/users')`.
+# spec/requests/users/index_spec.rb
 RSpec.describe 'GET /users' do
+  it 'returns 200' do
+    subject
+    expect(response).to have_http_status(200)
+  end
+end
+```
+
+Internally, `RSpec::RequestDescriber` defines `subject` and some `let` from its top-level description like this:
+
+```ruby
+RSpec.describe 'GET /users' do
+  subject do
+    __send__(http_method, path, headers:, params:)
+  end
+
+  let(:http_method) do
+    'get'
+  end
+
+  let(:path) do
+    '/users'
+  end
+
+  let(:headers) do
+    {}
+  end
+
+  let(:params) do
+    {}
+  end
+
   it 'returns 200' do
     subject
     expect(response).to have_http_status(200)
@@ -64,10 +76,9 @@ end
 
 ### headers
 
-If you want to modify request headers, change `headers` before calling `subject`.
+If you want to modify request headers, change `headers`:
 
 ```ruby
-# `subject` will be `get('/users', headers: { 'Authorization' => 'token 12345' })`.
 RSpec.describe 'GET /users' do
   context 'with Authorization header' do
     before do
@@ -84,10 +95,9 @@ end
 
 ### params
 
-If you want to modify request parameters, change `params` before calling `subject`.
+If you want to modify request parameters, change `params`:
 
 ```ruby
-# `subject` will be `get('/users', params: { 'sort' => 'id' })`.
 RSpec.describe 'GET /users' do
   context 'with sort parameter' do
     before do
@@ -111,10 +121,9 @@ end
 ### path parameters
 
 You can embed variables in URL path like `/users/:user_id`.
-In this example, the returned value of `user_id` method will be embedded as its real value.
+In this example, the returned value from `#user_id` method will be embedded as its real value.
 
 ```ruby
-# `subject` will be `get("/users/#{user_id}")`.
 RSpec.describe 'GET /users/:user_id' do
   let(:user) do
     User.create(name: 'alice')
