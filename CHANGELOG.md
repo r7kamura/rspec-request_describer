@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+- Drop Ruby 2.6- support.
+
 ### Fixed
 
 - Reduce some files from gem package.
