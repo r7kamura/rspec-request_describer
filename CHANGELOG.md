@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- Reduce some files from gem package.
+
 ## 0.5.0 - 2024-03-28
 
 ### Added
