@@ -1,13 +1,4 @@
-Metrics/AbcSize:
-  Enabled: false
-
-Metrics/BlockLength:
-  Enabled: false
-
-Metrics/LineLength:
-  Enabled: false
-
-Metrics/MethodLength:
+Metrics:
   Enabled: false
 
 Style/Documentation:

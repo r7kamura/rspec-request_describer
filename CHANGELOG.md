@@ -5,6 +5,7 @@
 ### Fixed
 
 - Reduce some files from gem package.
+- Correct some RuboCop offenses.
 
 ## 0.5.0 - 2024-03-28
 
