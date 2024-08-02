@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.6.0 - 2024-08-02
+
 ### Changed
 
 - Drop Ruby 2.6- support.
