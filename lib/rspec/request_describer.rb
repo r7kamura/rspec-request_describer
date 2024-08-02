@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/request_describer/version'
 
 module RSpec
@@ -56,7 +58,7 @@ module RSpec
           let(:env) do
             headers.inject({}) do |result, (key, value)|
               key = key.to_s
-              key = 'HTTP_' + key unless RESERVED_HEADER_NAMES.include?(key.downcase)
+              key = "HTTP_#{key}" unless RESERVED_HEADER_NAMES.include?(key.downcase)
               key = key.tr('-', '_').upcase
               result.merge(key => value)
             end

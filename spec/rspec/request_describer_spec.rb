@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openssl'
 
 RSpec.describe RSpec::RequestDescriber do
@@ -13,8 +15,8 @@ RSpec.describe RSpec::RequestDescriber do
         [
           :get,
           '/users',
-          headers: {},
-          params: {}
+          { headers: {},
+            params: {} }
         ]
       )
     end
@@ -29,8 +31,8 @@ RSpec.describe RSpec::RequestDescriber do
           [
             :get,
             '/users',
-            headers: { 'HTTP_AUTHORIZATION' => 'token 12345' },
-            params: {}
+            { headers: { 'HTTP_AUTHORIZATION' => 'token 12345' },
+              params: {} }
           ]
         )
       end
@@ -46,8 +48,8 @@ RSpec.describe RSpec::RequestDescriber do
           [
             :get,
             '/users',
-            headers: { 'HTTPS' => 'on' },
-            params: {}
+            { headers: { 'HTTPS' => 'on' },
+              params: {} }
           ]
         )
       end
@@ -63,8 +65,8 @@ RSpec.describe RSpec::RequestDescriber do
           [
             :get,
             '/users',
-            headers: { 'HTTP_AUTHORIZATION' => 'token 12345' },
-            params: {}
+            { headers: { 'HTTP_AUTHORIZATION' => 'token 12345' },
+              params: {} }
           ]
         )
       end
@@ -80,8 +82,8 @@ RSpec.describe RSpec::RequestDescriber do
           [
             :get,
             '/users',
-            headers: { 'HTTP_X_SIGNATURE' => 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f' },
-            params: {}
+            { headers: { 'HTTP_X_SIGNATURE' => 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f' },
+              params: {} }
           ]
         )
       end
@@ -97,8 +99,8 @@ RSpec.describe RSpec::RequestDescriber do
           [
             :get,
             '/users',
-            headers: {},
-            params: { 'sort' => 'id' }
+            { headers: {},
+              params: { 'sort' => 'id' } }
           ]
         )
       end
@@ -114,8 +116,8 @@ RSpec.describe RSpec::RequestDescriber do
           [
             :get,
             '/users',
-            headers: {},
-            params: { 'sort' => 'id' }
+            { headers: {},
+              params: { 'sort' => 'id' } }
           ]
         )
       end
@@ -132,8 +134,8 @@ RSpec.describe RSpec::RequestDescriber do
         [
           :get,
           '/users/1',
-          headers: {},
-          params: {}
+          { headers: {},
+            params: {} }
         ]
       )
     end
