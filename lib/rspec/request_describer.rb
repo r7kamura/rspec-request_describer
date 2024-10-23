@@ -33,18 +33,8 @@ module RSpec
               http_method,
               path,
               headers: env,
-              params: request_body
+              params: params
             )
-          end
-
-          let(:request_body) do
-            if headers.any? { |key, value| key.to_s.casecmp('content-type').zero? && value == 'application/json' }
-              params.to_json
-            else
-              params.inject({}) do |result, (key, value)|
-                result.merge(key.to_s => value)
-              end
-            end
           end
 
           let(:headers) do

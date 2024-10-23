@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'openssl'
-
 RSpec.describe RSpec::RequestDescriber do
   include RSpec::RequestDescriber
 
@@ -72,23 +70,6 @@ RSpec.describe RSpec::RequestDescriber do
       end
     end
 
-    context 'with headers including request body' do
-      before do
-        headers['X-Signature'] = "sha1=#{OpenSSL::HMAC.hexdigest('SHA1', 'secret', request_body.to_s)}"
-      end
-
-      it 'calls #get with HTTP_ prefixed and stringified keys headers' do
-        is_expected.to eq(
-          [
-            :get,
-            '/users',
-            { headers: { 'HTTP_X_SIGNATURE' => 'sha1=5d61605c3feea9799210ddcb71307d4ba264225f' },
-              params: {} }
-          ]
-        )
-      end
-    end
-
     context 'with params' do
       let(:params) do
         super().merge('sort' => 'id')
@@ -117,7 +98,7 @@ RSpec.describe RSpec::RequestDescriber do
             :get,
             '/users',
             { headers: {},
-              params: { 'sort' => 'id' } }
+              params: { sort: 'id' } }
           ]
         )
       end
