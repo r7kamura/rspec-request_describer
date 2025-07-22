@@ -129,7 +129,7 @@ RSpec.describe RSpec::RequestDescriber do
       1
     end
 
-    it 'calles #get with embeded variable in URL path' do
+    it 'calls #get with embedded variable in URL path' do
       is_expected.to eq(
         [
           :get,
