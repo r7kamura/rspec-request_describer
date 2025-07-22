@@ -122,6 +122,23 @@ RSpec.describe RSpec::RequestDescriber do
         )
       end
     end
+
+    context 'with query' do
+      let(:query) do
+        super().merge(status: 'active', sort: 'id')
+      end
+
+      it 'calls #get with query string' do
+        is_expected.to eq(
+          [
+            :get,
+            '/users?status=active&sort=id',
+            { headers: {},
+              params: {} }
+          ]
+        )
+      end
+    end
   end
 
   describe 'GET /users/:user_id' do
