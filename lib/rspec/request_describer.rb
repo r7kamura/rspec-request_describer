@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec/request_describer/version'
+require 'uri'
 
 module RSpec
   module RequestDescriber
@@ -78,7 +79,13 @@ module RSpec
           end
 
           let(:path) do
-            endpoint_segments[2].gsub(/:(\w+[!?=]?)/) { send(Regexp.last_match(1)) }
+            query_string = ::URI.encode_www_form(query)
+            path = endpoint_segments[2].gsub(/:(\w+[!?=]?)/) { send(Regexp.last_match(1)) }
+            "#{path}#{query_string.empty? ? '' : "?#{query_string}"}"
+          end
+
+          let(:query) do
+            {}
           end
         end
       end

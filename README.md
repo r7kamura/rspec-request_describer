@@ -66,6 +66,10 @@ RSpec.describe 'GET /users' do
   let(:params) do
     {}
   end
+  
+  let(:query) do
+    {}
+  end
 
   it 'returns 200' do
     subject
@@ -136,6 +140,25 @@ RSpec.describe 'GET /users/:user_id' do
   it 'returns 200' do
     subject
     expect(response).to have_http_status(200)
+  end
+end
+```
+
+### query parameters
+
+If you want to modify query parameters, change `query`:
+
+```ruby
+RSpec.describe 'GET /users' do
+  context 'with query parameter' do
+    let(:query)
+      { status: 'active', sort: 'id' }
+    end
+
+    it 'returns 200' do
+      subject
+      expect(path).to eq 'users?status=active&sort=id'
+    end
   end
 end
 ```
