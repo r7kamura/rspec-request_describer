@@ -48,7 +48,11 @@ Internally, `RSpec::RequestDescriber` defines `subject` and some `let` from its 
 ```ruby
 RSpec.describe 'GET /users' do
   subject do
-    __send__(http_method, path, headers:, params:)
+    send_request
+  end
+
+  let(:send_request) do
+    send(http_method, path, headers:, params:)
   end
 
   let(:http_method) do
