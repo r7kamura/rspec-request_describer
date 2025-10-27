@@ -28,7 +28,7 @@ module RSpec
             send_request
           end
 
-          let(:send_request) do
+          define_method(:send_request) do
             send(
               http_method,
               path,
