@@ -51,7 +51,7 @@ RSpec.describe 'GET /users' do
     send_request
   end
 
-  let(:send_request) do
+  def send_request
     send(http_method, path, headers:, params:)
   end
 
