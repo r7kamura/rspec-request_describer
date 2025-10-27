@@ -3,7 +3,7 @@ name: github-label-sync
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - .github/workflows/github-label-sync.yml
   workflow_dispatch:
