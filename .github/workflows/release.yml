@@ -1,0 +1,12 @@
+name: release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release:
+    uses: r7kamura/workflows/.github/workflows/gem-release.yml@main
+    secrets:
+      rubygems-org-api-key: ${{ secrets.RUBYGEMS_ORG_API_KEY }}
