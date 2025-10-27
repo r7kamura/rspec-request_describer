@@ -21,6 +21,6 @@ jobs:
       - uses: r7kamura/bump-request@v0
         with:
           command: |
-            sed -i -r 's/([0-9]+\.[0-9]+\.[0-9]+)/${{ inputs.version }}/' lib/**/version.rb
+            sed -i -r 's/([0-9]+\.[0-9]+\.[0-9]+)/${{ inputs.version }}/' lib/rspec/request_describer/version.rb
             bundle install
           version: ${{ inputs.version }}
