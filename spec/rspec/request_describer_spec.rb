@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'json'
 require 'openssl'
 
 RSpec.describe RSpec::RequestDescriber do
@@ -122,6 +123,40 @@ RSpec.describe RSpec::RequestDescriber do
         )
       end
     end
+
+    context 'with JSON content type' do
+      let(:headers) do
+        super().merge('Content-Type' => 'application/json')
+      end
+
+      it 'keeps JSON content type on GET with structured params' do
+        is_expected.to eq(
+          [
+            :get,
+            '/users',
+            { headers: { 'CONTENT_TYPE' => 'application/json' },
+              params: {} }
+          ]
+        )
+      end
+
+      context 'with params' do
+        let(:params) do
+          super().merge(sort: 'id')
+        end
+
+        it 'keeps GET params in the query hash' do
+          is_expected.to eq(
+            [
+              :get,
+              '/users',
+              { headers: { 'CONTENT_TYPE' => 'application/json' },
+                params: { 'sort' => 'id' } }
+            ]
+          )
+        end
+      end
+    end
   end
 
   describe 'GET /users/:user_id' do
@@ -138,6 +173,84 @@ RSpec.describe RSpec::RequestDescriber do
             params: {} }
         ]
       )
+    end
+  end
+
+  describe 'PATCH /users' do
+    def patch(*args)
+      [__method__, *args]
+    end
+
+    let(:headers) do
+      super().merge('Content-Type' => 'application/json')
+    end
+
+    context 'with params' do
+      let(:params) do
+        super().merge(sort: 'id')
+      end
+
+      it 'calls #patch with a JSON body' do
+        is_expected.to eq(
+          [
+            :patch,
+            '/users',
+            { headers: { 'CONTENT_TYPE' => 'application/json' },
+              params: '{"sort":"id"}' }
+          ]
+        )
+      end
+    end
+
+    context 'with custom request body' do
+      let(:request_body) do
+        '{ "invalid" }'
+      end
+
+      it 'passes through the raw request body' do
+        is_expected.to eq(
+          [
+            :patch,
+            '/users',
+            { headers: { 'CONTENT_TYPE' => 'application/json' },
+              params: '{ "invalid" }' }
+          ]
+        )
+      end
+    end
+
+    context 'with blank params' do
+      let(:params) do
+        ''
+      end
+
+      it 'passes through blank string params' do
+        is_expected.to eq(
+          [
+            :patch,
+            '/users',
+            { headers: { 'CONTENT_TYPE' => 'application/json' },
+              params: '' }
+          ]
+        )
+      end
+    end
+
+    context 'with nil params' do
+      let(:params) do
+        nil
+      end
+
+      it 'passes through nil params' do
+        is_expected.to eq(
+          [
+            :patch,
+            '/users',
+            { headers: { 'CONTENT_TYPE' => 'application/json' },
+              params: nil }
+          ]
+        )
+      end
     end
   end
 

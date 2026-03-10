@@ -38,12 +38,16 @@ module RSpec
           end
 
           let(:request_body) do
-            if headers.any? { |key, value| key.to_s.casecmp('content-type').zero? && value == 'application/json' }
-              params.to_json
-            else
-              params.inject({}) do |result, (key, value)|
-                result.merge(key.to_s => value)
+            if params.is_a?(Hash)
+              if headers.any? { |key, value| key.to_s.casecmp('content-type').zero? && value == 'application/json' } && !%w[get head].include?(http_method)
+                params.to_json
+              else
+                params.inject({}) do |result, (key, value)|
+                  result.merge(key.to_s => value)
+                end
               end
+            else
+              params
             end
           end
 
