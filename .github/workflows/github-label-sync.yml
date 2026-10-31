@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: r7kamura/github-label-sync-action@v0
+      - uses: r7kamura/github-label-sync-action@v0.1.0
         with:
           source_path: labels-keepachangelog.yml
           source_repository: r7kamura/github-label-presets
