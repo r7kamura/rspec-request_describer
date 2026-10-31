@@ -8,10 +8,20 @@ on:
 
 jobs:
   rspec:
-    uses: r7kamura/workflows/.github/workflows/ruby-rspec.yml@main
-    with:
-      ruby-version: 3.2.9
+    runs-on: ubuntu-latest
+    name: rspec (Ruby ${{ matrix.ruby }})
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.3', '3.4', '4.0']
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: ${{ matrix.ruby }}
+      - run: bundle exec rspec
   rubocop:
     uses: r7kamura/workflows/.github/workflows/ruby-rubocop.yml@main
     with:
-      ruby-version: 3.2.9
+      ruby-version: 3.3
