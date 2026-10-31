@@ -1,7 +1,5 @@
 # RSpec::RequestDescriber
 
-[![test](https://github.com/r7kamura/rspec-request_describer/actions/workflows/test.yml/badge.svg)](https://github.com/r7kamura/rspec-request_describer/actions/workflows/test.yml)
-
 RSpec plugin to write self-documenting request-specs.
 
 This gem is designed for:
